@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>设计表单</title>
+    <script src="../react-15.2.1/build/react.js"></script>
+    <script src="../react-15.2.1/build/react-dom.js"></script>
+    <script src="../react-15.2.1/build/browser.min.js"></script>
+    <script src="../react-15.2.1/jquery-1.9.0.min.js"></script>
+    <style>
+        body{
+            background-color: #f8f8f8;
+            padding: 0px;
+        }
+        .input{
+            width: 300px;
+            margin-top: 50px;
+            margin-left: 300px;
+            border: solid lightgreen 1px;
+            float: left;
+        }
+        input{
+            line-height: 30px;
+            margin-inside: 100px;
+        }
+        .select{
+            width: 250px;
+            height: 300px;
+            margin-top: 30px;
+            margin-left: 600px;
+            border: solid aquamarine 1px;
+            position: absolute;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">设计表单</h1>
+<div id="example"></div>
+<div id ="formPopup"></div>
+<script type="text/babel">
+
+    const Work = React.createClass({
+
+        render:function () {
+            return (<div className="input" id="popup">
+                <a href="demo.html" >编辑</a><br/>
+                {this.props.data.map(item=>{
+                    if (item.type ==='text'){
+                        return <li><input type="text" /></li>
+                    }else {
+                        return <li><input type="date" /></li>
+                    }
+                })}
+                <button>保存</button>
+            </div>);
+        }
+    });
+
+    var TodoApp = React.createClass({
+        getInitialState: function () {
+            return {items: []};
+        },
+        onClick: function (e) {
+            this.setState({type: e.target.value,id:Date.now()});
+        },
+        handleSubmit: function (e) {
+            e.preventDefault();
+            this.state.items.push({type: this.state.type, id:this.state.id});
+            this.setState({type: e.target.value,id:Date.now()});
+
+        },
+        delete :function () {
+
+            this.setState(this.state.items.unshift());
+            console.log(this.state.items.unshift());
+
+        },
+        showPupup:function () {
+            $("#popup").show();
+            $("#hei").hide();
+            ReactDOM.render(
+                    <Work data = {this.state.items}/>,
+                    document.getElementById("formPopup")
+            )
+        },
+        display:function () {
+
+            const elements = items;
+
+            this.setState({elements:elements});
+        },
+        render: function () {
+            return (
+                    <div id="hei">
+                        <button onClick = {this.showPupup} >预览</button>
+                        <div className="input">
+                            {this.state.items.map(item=>{
+                                if (item.type === 'date'){
+                                    return <li className={item.id}><input type="date" /><button onClick = {this.delete}>删除</button></li>;
+                                }
+                                else {
+                                    return <li className={item.id}><input type="text" /><button onClick = {this.delete}>删除</button></li>
+                                }
+                            })
+                            }
+                        </div>
+                        <div>
+                            <form onSubmit={this.handleSubmit} className="select">
+
+                                <input onClick={this.onClick} type="radio" name="radio" value="text"/><span>文本框</span>
+                                <input onClick={this.onClick} type="radio" name="radio" value="date"/><span>日期框</span>
+                                <button onClick = {this.handleSubmit}>{'Add >' + (this.state.items.length-1 + 1)}</button>
+                            </form>
+                        </div>
+                    </div>
+            );
+        }
+    });
+
+    ReactDOM.render(<TodoApp />, document.getElementById('example'));
+
+
+</script>
+</body>
+</html>

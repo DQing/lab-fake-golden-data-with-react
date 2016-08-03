@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>设计表单</title>
+    <script src="../react-15.2.1/build/react.js"></script>
+    <script src="../react-15.2.1/build/react-dom.js"></script>
+    <script src="../react-15.2.1/build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    const typeArray = ['文本框', '日期框'];
+
+    const Design = React.createClass({
+
+        render: function () {
+            return (<div>
+                <Preview />
+                <designForm data = {this.props.data}/>
+            </div>)
+        }
+
+    });
+
+    const Preview = React.createClass({
+
+        render: function () {
+            return (<div className="preview">
+                <button type="button" href="#">预览</button>
+            </div>);
+        }
+
+    });
+    const designForm = React.createClass({
+
+        render:function () {
+            return(<div>
+                <display />
+                <selectFrame data = {this.props.data}/>
+            </div>)
+        }
+
+    });
+
+    const display = React.createClass({
+        render:function () {
+            return ('');
+        }
+    });
+    const selectFrame = React.createClass({
+        render:function () {
+            return (<div>
+                <p>{this.props.data.map()}</p>
+            </div>);
+        }
+    });
+    ReactDOM.render(<Design data= {typeArray}/>, document.getElementById('example'));
+</script>
+</body>
+</html>

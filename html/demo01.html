@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../react-15.2.1/build/react.js"></script>
+    <script src="../react-15.2.1/build/react-dom.js"></script>
+    <script src="../react-15.2.1/build/browser.min.js"></script>
+    <style>
+        .input{
+            width: 500px;
+            height: auto;
+            margin-top: 100px;
+            border: rgba(143, 255, 236, 0.98) solid 1px;
+            margin-left: 350px;
+
+        }
+        input{
+            line-height: 30px;
+            margin-bottom: 50px;
+        }
+        button{
+            margin-left: 200px;
+            margin-bottom: 50px;
+        }
+        a{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    const Work = React.createClass({
+
+        render:function () {
+            return (<div className="input">
+                <a href="demo.html" >编辑</a><br/>
+                <input type="text" name="text" value="" /><br/>
+                <input type="date" name="text" value="" /><br/>
+                <input type="text" name="text" value="" /><br/>
+                <input type="text" name="text" value="" /><br/>
+                <button>保存</button>
+            </div>);
+        }
+    });
+    ReactDOM.render(<Work />,document.getElementById('example'));
+</script>
+</body>
+</html>
